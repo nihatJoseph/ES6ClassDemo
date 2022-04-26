@@ -19,13 +19,18 @@ class UI {
             </tr>
         `;
     list.innerHTML += html;
-    console.log(list.innerHTML);
   }
 
   clearControls() {
     const title = (document.getElementById("title").value = "");
     const instructor = (document.getElementById("instructor").value = "");
     const image = (document.getElementById("image").value = "");
+  }
+
+  deleteCourse(element) {
+    if (element.classList.contains("delete")) {
+      element.parentElement.parentElement.remove();
+    }
   }
 }
 
@@ -34,7 +39,6 @@ document.getElementById("save").addEventListener("click", function (e) {
   const instructor = document.getElementById("instructor").value;
   const image = document.getElementById("image").value;
 
-  console.log(document.getElementById("title").value);
   const course = new Course(title, instructor, image);
 
   const ui = new UI();
@@ -44,4 +48,9 @@ document.getElementById("save").addEventListener("click", function (e) {
   ui.clearControls();
 
   e.preventDefault();
+});
+
+document.getElementById("course-list").addEventListener("click", function (e) {
+  const ui = new UI();
+  ui.deleteCourse(e.target);
 });
